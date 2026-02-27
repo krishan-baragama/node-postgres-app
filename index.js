@@ -2,9 +2,10 @@ const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 
+const userRoutes = require("./routes/userRoutes");
+
 const env = process.env.NODE_ENV || "dev";
 
-// Load correct env file
 dotenv.config({
   path: path.resolve(__dirname, `.env.${env}`)
 });
@@ -12,6 +13,9 @@ dotenv.config({
 const app = express();
 
 app.use(express.json());
+
+// Routes
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 3000;
 
